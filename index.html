@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Лабораторная №1 — Сокеты</title>
+        <title>my-site</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/fontawesome.min.css" rel="stylesheet">
         <link href="css/brands.min.css" rel="stylesheet">
@@ -24,23 +24,10 @@
     <body class="homepage">
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Лабораторная №1 — Сокеты</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="navbar-brand" href=".">my-site</a>
 
                 <!-- Expanded navigation -->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href="." class="nav-link active" aria-current="page">Главная</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="lab1_report/" class="nav-link">Отчёт по лабораторной</a>
-                            </li>
-                        </ul>
 
                     <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
@@ -48,16 +35,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="lab1_report/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -75,24 +52,109 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
-            
-            <li class="nav-item" data-bs-level="1"><a href="#no1" class="nav-link">Лабораторная работа №1</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="no1">Лабораторная работа №1</h1>
-<p>Добро пожаловать в документацию по лабораторной работе №1 по дисциплине «Веб-программирование».</p>
-<p>В этой документации представлены:
-- Цели и задачи работы.
-- Теоретические сведения о сокетах.
-- Описание реализации всех заданий (1–5).
-- Инструкция по запуску и тестированию.</p>
-<p>Перейдите в раздел «Отчёт по лабораторной» в меню слева, чтобы посмотреть подробный отчёт.</p></div>
+<p>ОТЧЁТ ПО ЛАБОРАТОРНОЙ РАБОТЕ №2</p>
+<p>Разработка веб-приложения RacingLeaderboard</p>
+<p>Студент: Кирилл Галилей
+Группа: k3340
+Дата: 10 января 2026</p>
+<p>==============================================================</p>
+<p>ВВЕДЕНИЕ</p>
+<p>Разработано веб-приложение RacingLeaderboard на Django для управления гонками и водителями.</p>
+<p>Технологии: Django 4.x, SQLite3, Bootstrap 5.3, HTML5, CSS3</p>
+<p>==============================================================</p>
+<p>ЗАДАНИЕ</p>
+<p>Требовалось реализовать три компонента:</p>
+<p>Навигационное меню с Bootstrap</p>
+<p>Пагинацию данных</p>
+<p>Поиск с пагинацией</p>
+<p>==============================================================</p>
+<p>АРХИТЕКТУРА</p>
+<p>Паттерн MVT (Model-View-Template). URL маршрутизирует запрос на view функцию. View обрабатывает логику, получает данные из БД через ORM, передает в шаблон. Шаблон рендерит HTML с Bootstrap.</p>
+<p>Структура:</p>
+<p>races/ - приложение Django (models, views, forms, urls)</p>
+<p>templates/races/ - HTML шаблоны</p>
+<p>db.sqlite3 - база данных</p>
+<p>manage.py - управление проектом</p>
+<p>==============================================================</p>
+<p>МОДЕЛИ ДАННЫХ</p>
+<p>8 таблиц: CustomUser, Team, Driver, Car, Race, RaceResult, Comment, Registration</p>
+<p>CustomUser - расширенный пользователь (поля: username, email, bio, avatar)</p>
+<p>Team - команда (name, description, founded_year)</p>
+<p>Driver - профиль водителя (experience, driver_class, description)</p>
+<p>Car - машина водителя (make, model, year)</p>
+<p>Race - гонка (name, location, date, description)</p>
+<p>RaceResult - результат гонки (position, time, points)</p>
+<p>Comment - комментарий (text, rating, created_at)</p>
+<p>Registration - регистрация на гонку (driver, race)</p>
+<p>==============================================================</p>
+<p>РЕАЛИЗОВАННЫЕ КОМПОНЕНТЫ</p>
+<p>5.1 НАВИГАЦИОННОЕ МЕНЮ</p>
+<p>Файл: templates/races/base.html</p>
+<p>Меню содержит логотип, пункты: Гонки, Водители, Команды.</p>
+<p>Динамические пункты:</p>
+<p>Если залогинен: Мой профиль, Администратор, Выход</p>
+<p>Если не залогинен: Регистрация, Вход</p>
+<p>Адаптивность: на ПК меню видно полностью, на мобильных сворачивается в hamburger-меню благодаря Bootstrap классам navbar-expand-lg и collapse.</p>
+<p>5.2 ПАГИНАЦИЯ</p>
+<p>Файл: races/views.py</p>
+<p>Используется Django Paginator для разбиения данных:</p>
+<p>Гонки: 5 на странице</p>
+<p>Водители: 6 на странице</p>
+<p>Команды: 10 на странице</p>
+<p>View создает объект Paginator, получает нужную страницу через get_page(), передает в шаблон.</p>
+<p>В шаблоне выводятся кнопки: Первая, Назад, номера страниц (текущая выделена), Вперед, Последняя.</p>
+<p>5.3 ПОИСК С ПАГИНАЦИЕЙ</p>
+<p>Файл: races/views.py и templates/</p>
+<p>Поиск для гонок: по названию, локации, описанию
+Поиск для водителей: по имени, фамилии, команде, описанию</p>
+<p>Используются Q объекты с оператором | (ИЛИ) и icontains (содержит без учета регистра).</p>
+<p>При поиске применяется фильтр к queryset, затем к отфильтрованным результатам применяется пагинация.</p>
+<p>При навигации по страницам параметр search сохраняется в URL (?page=2&amp;search=Ferrari).</p>
+<p>==============================================================</p>
+<p>ОСНОВНЫЕ СТРАНИЦЫ</p>
+<p>race_list.html - список гонок с поиском и пагинацией
+race_detail.html - информация о гонке, результаты, комментарии
+driver_list.html - список водителей с поиском и пагинацией
+driver_detail.html - профиль водителя
+team_list.html - список команд с пагинацией
+register.html - регистрация пользователя
+add_comment.html - добавление комментария
+create_driver_profile.html - создание профиля водителя
+edit_driver_profile.html - редактирование профиля
+race_leaderboard.html - таблица результатов гонки</p>
+<p>==============================================================</p>
+<p>VIEW ФУНКЦИИ</p>
+<p>race_list - выводит гонки с поиском и пагинацией (5 на странице)
+driver_list - выводит водителей с поиском и пагинацией (6 на странице)
+team_list - выводит команды с пагинацией (10 на странице)
+race_detail - показывает детали гонки с результатами и комментариями
+driver_detail - показывает профиль водителя
+register_user - регистрирует нового пользователя
+create_driver_profile - создает профиль Driver (требует login)
+edit_driver_profile - редактирует профиль Driver (требует login, только владелец)
+add_comment - добавляет комментарий к гонке (требует login)
+register_for_race - регистрирует водителя на гонку (требует login)
+unregister_from_race - удаляет регистрацию (требует login)
+race_leaderboard - показывает результаты гонки</p>
+<p>==============================================================</p>
+<p>ТЕХНИЧЕСКИЕ ДЕТАЛИ</p>
+<p>Навигационное меню использует Bootstrap классы navbar, navbar-expand-lg, navbar-toggler для адаптивности. JavaScript из Bootstrap автоматически обрабатывает collapse меню на мобильных.</p>
+<p>Пагинация использует Django Paginator класс. View получает параметр page из GET, вызывает get_page(page_number), получает объект Page с нужными объектами.</p>
+<p>Поиск использует Q объекты для построения сложных фильтров. Фильтр применяется до пагинации. Параметр search передается в каждую ссылку пагинации через {% if search_query %}&amp;search={{ search_query }}{% endif %}.</p>
+<p>Аутентификация использует встроенную Django систему. Декоратор @login_required защищает view функции. Проверка user.is_authenticated в шаблонах.</p>
+<p>==============================================================</p>
+<p>ВЫВОДЫ</p>
+<p>Все три требуемых компонента успешно реализованы:</p>
+<p>Навигационное меню работает на всех устройствах благодаря Bootstrap.</p>
+<p>Пагинация правильно разбивает данные и выводит навигацию.</p>
+<p>Поиск фильтрует данные и сохраняется при навигации по страницам.</p>
+<p>Приложение следует паттерну MVT Django, использует встроенные классы Paginator и Q для фильтрации.</p>
+<p>Код организован, легко расширяется и поддерживается.</p></div>
             </div>
         </div>
 
@@ -174,5 +236,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-12-29 08:46:45.786746+00:00
+Build Date UTC : 2026-01-19 08:17:24.268831+00:00
 -->
