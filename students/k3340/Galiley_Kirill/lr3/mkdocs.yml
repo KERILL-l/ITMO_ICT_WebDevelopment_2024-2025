@@ -1,6 +1,6 @@
 site_name: Hotel Management System API
 site_description: Документация API системы управления гостиницей
-site_author: Your Name
+site_author: Кирилл Галилей
 
 theme:
   name: material
@@ -16,7 +16,8 @@ theme:
 
 nav:
   - Главная: index.md
-  - API Endpoints: api/endpoints.md
+  - LR3: api/endpoints.md
+  - LR4: frontend/frontend.md
 
 markdown_extensions:
   - pymdownx.highlight
